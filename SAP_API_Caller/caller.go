@@ -55,30 +55,31 @@ func (c *SAPAPICaller) Header(creditMemoRequest string) {
 	headerData, err := c.callCreditMemoRequestSrvAPIRequirementHeader("A_CreditMemoRequest", creditMemoRequest)
 	if err != nil {
 		c.log.Error(err)
-		return
+	} else {
+		c.log.Info(headerData)
 	}
-	c.log.Info(headerData)
 
 	headerPartnerData, err := c.callToHeaderPartner(headerData[0].ToHeaderPartner)
 	if err != nil {
 		c.log.Error(err)
-		return
+	} else {
+		c.log.Info(headerPartnerData)
 	}
-	c.log.Info(headerPartnerData)
 
 	itemData, err := c.callToItem(headerData[0].ToItem)
 	if err != nil {
 		c.log.Error(err)
-		return
+	} else {
+		c.log.Info(itemData)
 	}
-	c.log.Info(itemData)
 
 	itemPricingElementData, err := c.callToItemPricingElement(itemData[0].ToItemPricingElement)
 	if err != nil {
 		c.log.Error(err)
-		return
+	} else {
+		c.log.Info(itemPricingElementData)
 	}
-	c.log.Info(itemPricingElementData)
+	return
 }
 
 func (c *SAPAPICaller) callCreditMemoRequestSrvAPIRequirementHeader(api, creditMemoRequest string) ([]sap_api_output_formatter.Header, error) {
@@ -148,16 +149,17 @@ func (c *SAPAPICaller) Item(creditMemoRequest, creditMemoRequestItem string) {
 	itemData, err := c.callCreditMemoRequestSrvAPIRequirementItem("A_CreditMemoRequestItem", creditMemoRequest, creditMemoRequestItem)
 	if err != nil {
 		c.log.Error(err)
-		return
+	} else {
+		c.log.Info(itemData)
 	}
-	c.log.Info(itemData)
 
 	itemPricingElementData, err := c.callToItemPricingElement(itemData[0].ToItemPricingElement)
 	if err != nil {
 		c.log.Error(err)
-		return
+	} else {
+		c.log.Info(itemPricingElementData)
 	}
-	c.log.Info(itemPricingElementData)
+	return
 }
 
 func (c *SAPAPICaller) callCreditMemoRequestSrvAPIRequirementItem(api, creditMemoRequest, creditMemoRequestItem string) ([]sap_api_output_formatter.Item, error) {
